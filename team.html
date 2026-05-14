@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team — Autonomous Emergency Response Robot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <a class="logo" href="index.html" title="Autonomous Emergency Response Robot"
+        >AER Robot</a
+      >
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        aria-label="Open menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="primary-nav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html#introduction">Introduction</a></li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="design.html">Design</a></li>
+          <li><a href="implementation.html">Implementation</a></li>
+          <li><a href="conclusion.html">Conclusion</a></li>
+          <li><a href="team.html" aria-current="page">Team</a></li>
+          <li><a href="additional-materials.html">Additional Materials</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="page-with-nav">
+      <section class="content-section" id="team">
+        <h2>Team</h2>
+        <p class="team-intro"><strong>Team #9</strong> — EECS/MecEng C106A</p>
+        <div class="team-grid">
+          <article class="team-member">
+            <h3 class="team-member-name">Pranav Bhatt</h3>
+            <p>
+              Pranav worked on ...
+            </p>
+            <p>
+              Pranav is an Engineering, Math and Stats student who is also British. 
+              He is interested in the automobile side of robotics and loves exploring autonomous systems.
+            </p>
+          </article>
+          <article class="team-member">
+            <h3 class="team-member-name">I Gy Chen</h3>
+            <p>
+              I Gy worked on ...
+            </p>
+            <p>
+              She is pursuing her undergraduate studies in Computer Science and Statistics. 
+              Her interests are AI and machine learning, particularly in computer vision and physical AI.
+            </p>
+          </article>
+          <article class="team-member">
+            <h3 class="team-member-name">Jaemin Jang</h3>
+            <p>
+              Jaemin worked on ...
+            </p>
+            <p>
+              He is pursuing his undergraduate studies in Mechanical Engineering and Computer Science. 
+              His interests lie at the intersection of aerospace and robotics, particularly space robotics and autonomous systems for in-space operations.
+            </p>
+          </article>
+          <article class="team-member">
+            <h3 class="team-member-name">Christian Jimenez</h3>
+            <p>
+              Christian worked on ...
+            </p>
+            <p>
+              He is a Mechanical Engineering student trying to find his calling in engineering by trying out a variety of different subjects to see which one he likes best. 
+              He has been interested in robotics lately.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <p>EECS/MecEng C106A · Autonomous Emergency Response Robot · Team #9</p>
+    </footer>
+
+    <script>
+      (function () {
+        var header = document.querySelector(".site-header");
+        var toggle = document.querySelector(".nav-toggle");
+        var links = document.querySelectorAll(".nav-links a");
+
+        if (!toggle || !header) return;
+
+        toggle.addEventListener("click", function () {
+          var open = header.classList.toggle("is-open");
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+          toggle.setAttribute(
+            "aria-label",
+            open ? "Close menu" : "Open menu"
+          );
+        });
+
+        links.forEach(function (link) {
+          link.addEventListener("click", function () {
+            header.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "Open menu");
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

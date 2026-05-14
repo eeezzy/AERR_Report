@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autonomous Emergency Response Robot — EECS/MecEng C106A Team 9</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <a class="logo" href="index.html" title="Autonomous Emergency Response Robot"
+        >AER Robot</a
+      >
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        aria-label="Open menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="primary-nav" aria-label="Primary">
+        <ul class="nav-links">
+          <li>
+            <a href="#introduction" aria-current="page">Introduction</a>
+          </li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="design.html">Design</a></li>
+          <li><a href="implementation.html">Implementation</a></li>
+          <li><a href="conclusion.html">Conclusion</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="additional-materials.html">Additional Materials</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="hero-course">EECS/MecEng C106A</p>
+        <h1 class="hero-title" id="hero-title">
+          Autonomous Emergency Response Robot
+        </h1>
+        <p class="hero-lede">
+          A dual-robot ROS&nbsp;2 system that combines a Turtlebot3 and a UR7e
+          manipulator to demonstrate an end-to-end emergency-response workflow.
+        </p>
+        <p class="hero-meta">
+          Team #9 &nbsp;|&nbsp; Pranav Bhatt, I Gy Chen, Jaemin Jang, Christian
+          Jimenez
+        </p>
+        <a class="cta" href="#introduction">Explore Project</a>
+        <div class="hero-footer-band" aria-hidden="true"></div>
+      </section>
+
+      <section
+        class="content-section home-intro"
+        id="introduction"
+        aria-labelledby="intro-heading"
+      >
+        <h2 id="intro-heading">Introduction</h2>
+        <p>
+          The original goal was to demonstrate an end-to-end emergency response
+          system at a small scale, integrating the major themes of C106A (Control,
+          Dynamics, and Perception) in a single project.
+        </p>
+        <p>
+          By coordinating two robots instead of one, our team could tackle a
+          richer problem: how to use both robots together to complete a delivery
+          task suited to emergency response. The Turtlebot surveys the space,
+          builds a map, and locates colored cones while the UR7e arm delivers the
+          correct colored block to a staging mount so the mobile robot can
+          complete mitigation at the cone.
+        </p>
+      </section>
+    </main>
+    <footer class="page-footer">
+      <p>EECS/MecEng C106A · Autonomous Emergency Response Robot · Team #9</p>
+    </footer>
+
+    <script>
+      (function () {
+        var header = document.querySelector(".site-header");
+        var toggle = document.querySelector(".nav-toggle");
+        var links = document.querySelectorAll(".nav-links a");
+
+        if (!toggle || !header) return;
+
+        toggle.addEventListener("click", function () {
+          var open = header.classList.toggle("is-open");
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+          toggle.setAttribute(
+            "aria-label",
+            open ? "Close menu" : "Open menu"
+          );
+        });
+
+        links.forEach(function (link) {
+          link.addEventListener("click", function () {
+            header.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "Open menu");
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
