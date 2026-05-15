@@ -44,38 +44,19 @@
     <main class="page-with-nav">
       <section class="content-section" id="design">
         <h2>Design</h2>
+        <p class="subhead">Hardware Design</p>
         <p>
-          Hardware centers on a Turtlebot3 mobile base with a custom mount and
-          delivery box, paired with a UR7e manipulator and RGB-D sensing. Cone
-          color encodes hazard type; colored blocks are the “tools” used to
-          neutralize each hazard. An ArUco marker on the mount supports precise
-          handoff poses for the arm.
+          (will be added later)
         </p>
-        <p class="subhead">High-level workflow</p>
-        <ul>
-          <li>
-            Turtlebot: start docked, run auto-mapping / exploration, detect and
-            track hazards, return to dock, and signal the arm when a specific
-            block color is required.
-          </li>
-          <li>
-            UR7e: listen for Turtlebot requests, pick the requested colored block,
-            place it on the mount using ArUco tag 10 for alignment, and publish a
-            completion signal.
-          </li>
-          <li>
-            Turtlebot: after completion, navigate to the confirmed cone and wait
-            for human pickup of the delivered mitigation payload.
-          </li>
-        </ul>
-        <p class="subhead">Multi-robot coordination</p>
-        <p>
-          Both robots originally published a <code>base_link</code> frame, which
-          broke RViz when run together. Namespacing alone proved brittle with
-          existing assets, so the team adopted ROS&nbsp;2 Domain Bridge with
-          separate domain IDs and a YAML bridge to relay selected topics, giving
-          stable transforms and communication across platforms.
-        </p>
+        <p class="subhead">Illustration of the workflow</p>
+        <figure class="project-illustration" style="display: flex; justify-content: center; align-items: center; max-width: 100%;">
+          <img
+            src="project_illustration.png"
+            alt="Illustration of the workflow"
+            style="max-width: 100%; height: auto; display: block; margin: 0 auto;"
+          />
+        </figure>
+
       </section>
     </main>
 

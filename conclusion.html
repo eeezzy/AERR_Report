@@ -45,36 +45,11 @@
       <section class="content-section" id="conclusion">
         <h2>Conclusion</h2>
         <p>
-          The project shows how classical navigation, exploration, and geometric
-          perception can be composed with industrial manipulator tooling to
-          prototype emergency-style logistics. The hardest integration work was
-          reliable camera–LiDAR fusion on the Turtlebot and consistent multi-robot
-          transforms across domains.
+          Our project was able to reach our original goal: demonstrate an end-to-end emergency response system at a small scale, integrating the major themes of C106A.
+
         </p>
-        <p class="subhead">Challenges (from deployment)</p>
-        <ul>
-          <li>
-            Turtlebot: ROS namespacing for topics, Nav2 inflation and footprint
-            tuning, irregular lab geometry, and fusion stability.
-          </li>
-          <li>
-            UR7e: ArUco detection robustness, blocks not landing cleanly in the
-            box, and error accumulation over long sequences.
-          </li>
-        </ul>
+        <p class="subhead">Challenges</p>
         <p class="subhead">Improvements and extensions</p>
-        <ul>
-          <li>
-            Improvements: stronger PID on the UR7e, handling multiple blocks per
-            cycle, and richer cone inspection (e.g., orbiting cones for color
-            confirmation).
-          </li>
-          <li>
-            Extensions: tactile or audio cues (buzzer) for mission state,
-            additional shapes and colors, playful knock-over tasks, and fully
-            autonomous last-mile delivery directly at the hazard pose.
-          </li>
-        </ul>
 
         <h2>AI Disclosure</h2>
         <p>

@@ -45,22 +45,37 @@
       <section class="content-section" id="results">
         <h2>Results</h2>
         <p>
-          The integrated stack runs from a single launch entry point, with
-          variants for simulation versus hardware and manual versus automatic
-          mapping controlled via command-line arguments. The Turtlebot performs
-          frontier-based exploration with Nav2 and the SLAM Toolbox, fuses camera
-          color cues with LiDAR geometry to publish stable hazard tracks, and
-          hands off mission phases through a dedicated Mission Manager finite
-          state machine.
+          The demo video shows our successful result. We were able to demonstrate the whole pipeline as shown below.
         </p>
-        <p>
-          The UR7e side executes perception (depth-based colored blocks, ArUco
-          on the mount), motion planning with MoveIt and inverse kinematics, and
-          gripper actuation, signaling completion so the Turtlebot can return to
-          the dock, receive the block, and navigate to a confirmed hazard.
-        </p>
-        <p class="subhead">Demo recordings</p>
-        <p>(Add videos in the future)</p>
+        <p class="subhead">Final Demo</p>
+        <figure class="video-figure">
+          <iframe
+            src="https://drive.google.com/file/d/1jog3sXX4-q9WAxHVhf8sEWf4yXnoAepv/preview"
+            title="Original view (no sound)"
+            allow="autoplay"
+            allowfullscreen
+          ></iframe>
+          <figcaption>
+            <a
+              href="https://drive.google.com/file/d/1jog3sXX4-q9WAxHVhf8sEWf4yXnoAepv/view?usp=sharing"
+              >Open in Google Drive</a
+            >.
+          </figcaption>
+        </figure>
+        <figure class="video-figure">
+          <iframe
+            src="https://drive.google.com/file/d/1gMJS_nokwlGj8hSNmkz_nCgqGElOcSvD/preview"
+            title="Pranav view (8×)"
+            allow="autoplay"
+            allowfullscreen
+          ></iframe>
+          <figcaption>
+            <a
+              href="https://drive.google.com/file/d/1gMJS_nokwlGj8hSNmkz_nCgqGElOcSvD/view?usp=sharing"
+              >Open in Google Drive</a
+            >.
+          </figcaption>
+        </figure>
       </section>
     </main>
 

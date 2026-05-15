@@ -44,69 +44,39 @@
     <main class="page-with-nav">
       <section class="content-section" id="implementation">
         <h2>Implementation</h2>
-        <p class="subhead">Launch and architecture</p>
+        <h3>Turtlebot</h3>
+        <h3>UR7e</h3>
+        <p class="subhead">Perception</p>
         <p>
-          <code>launch/system.launch.py</code> is the “big green button”: it
-          brings up mapping, perception, navigation, and mission management for
-          the Turtlebot side, exposes tuning parameters, and supports sim versus
-          real and manual versus auto-map modes from the command line.
+          The perception node (<code>process_pointcloud.py</code>) identifies the 3D positions of colored blocks on a table using the RealSense depth camera's pointcloud then transforms the entire cloud into the robot's base_link frame. 
+          The node then applies a filter to only retain the table surface. 
+          A greedy clustering algorithm groups the points by proximity in the XY plane. 
+          Starting from an arbitrary seed point, it assigns all points within a fixed radius to the same cluster, and discards clusters with small number of points to suppress noise. 
+          For each valid cluster, the mean RGB value determines the block's color. For simplicity, we used green instead of yellow for better RGB classification (<code>yellow_block</code> in code = green colored block in reality).
+          The centroid of each cluster is then published as a PointStamped message on the corresponding <code>/red_block_pose</code>, <code>/blue_block_pose</code>, or <code>/yellow_block_pose topic</code>. 
+          
         </p>
-        <p class="subhead">Auto-mapping</p>
+        <p class="subhead">ArUco Marker Detection</p>
         <p>
-          After considering explore-lite, the team implemented custom frontier
-          exploration with a bounding polygon. Occupancy grids from SLAM Toolbox
-          are masked and morphologically filtered; connected components label
-          unknown frontiers. Frontiers are scored by mass, distance from the
-          robot in the map frame, and size before sending goals through Nav2’s
-          action server. A finite state machine sequences map iteration,
-          frontier filtering, and discovery.
+          The ArUco node (<code>aruco_node.py</code>) handles real-time detection and pose estimation using OpenCV's ArUco library. 
+          It initializes by reading the camera’s intrinsic parameters from a single <code>CameraInfo</code> message, then processes each incoming image frame by converting it to grayscale and detecting markers using the DICT_5X5_250 dictionary.
+          For detected markers, it estimates poses with <code>estimatePoseSingleMarkers</code>.
+          Rotation vectors are converted into quaternions through Rodrigues transformation and a custom quaternion conversion function.
+          The node then publishes each marker as a TF2 transform relative to the camera frame, while also outputting marker poses through <code>PoseArray</code> and <code>ArucoMarkers</code> topics. 
         </p>
-        <p class="subhead">Perception and hazard pipeline</p>
+        <p class="subhead">Motion Planning and IK</p>
         <p>
-          Cone colors are segmented in HSV with OpenCV, using morphological
-          opening and closing before contour extraction. The hazard detector fuses
-          image bearings with LiDAR clusters: an initial polar-domain linear
-          clusterer worked in simulation but failed under real sensor noise, so
-          the pipeline was upgraded with agglomerative merging of small clusters.
-          Detections are matched to clusters (moving from greedy per-detection
-          assignment toward a scored matrix formulation) and converted to map
-          coordinates for hazard messages.
+          The IKPlanner class (<code>ik.py</code>) uses MoveIt services to provide inverse kinematics and motion planning. 
+          The <code>compute_ik</code> sends a <code>GetPositionIK</code> request to MoveIt's <code>/compute_ik</code> service. 
+          The <code>plan_to_joints</code> then calls MoveIt's <code>/plan_kinematic_path</code> service using <code>RRTConnect</code>. 
         </p>
+        <p class="subhead">Task Execution</p>
         <p>
-          A hazard tracker merges repeated detections by color within a radius,
-          confirms tracks after three consistent observations, and publishes
-          smoothed poses for the Mission Manager and RViz.
+          <code>main.py</code> sequences the full pick-and-place pipeline. 
+          When a color command arrives on /scout/package_request, the node resolves the target block's 3D position from the most recent perception output and pre-computes a chained series of IK solutions using each solution as the seed for the next, so the arm takes an efficient joint-space path through the sequence. 
+          These IK results are pushed onto self.job_queue. Each call to execute_jobs pops one item and dispatches it. 
+          When the arm is stationary at the discovery position and ArUco tag #10 is detected, _aruco_cb transforms the marker pose into base_link and queues a drop IK target, gripper release, retreat, return-to-home motion, and sends True on /scout/package_ready for the TurtleBot.
         </p>
-        <p class="subhead">Mission Manager</p>
-        <p>
-          The Mission Manager is the Turtlebot’s orchestrating FSM, sequencing
-          auto-mapping, navigation to frontiers, cone handling, docking, UR7e
-          synchronization, and user handoff. It communicates with Nav2 using
-          patterns tuned for the project’s navigator rather than only the basic
-          tutorials.
-        </p>
-        <p class="subhead">UR7e application graph</p>
-        <ul>
-          <li>
-            <strong>Perception:</strong> colored block poses from depth,
-            constant wrist→camera transforms, ArUco detections from
-            <code>ros2_aruco</code>.
-          </li>
-          <li>
-            <strong>Planning / control:</strong> IK and motion planning
-            libraries, MoveIt services (<code>/compute_ik</code>,
-            <code>/plan_kinematic_path</code>), and
-            <code>follow_joint_trajectory</code> to the UR driver, plus gripper
-            toggling.
-          </li>
-          <li>
-            <strong>Integration:</strong> main grasp node coordinates block
-            poses and markers, publishes readiness on
-            <code>/scout/package_ready</code>, and follows the launch recipe:
-            RealSense + MoveIt, a TF stabilization delay, then four application
-            nodes.
-          </li>
-        </ul>
       </section>
     </main>
 
