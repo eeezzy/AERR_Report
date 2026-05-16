@@ -52,25 +52,32 @@
         </p>
         <p class="subhead">Challenges</p>
         <p>
-          The turtlebots biggest challenge was running into walls where it was given a set polygon to stay within and said polygon being too small for the pathfinding to find an optimal path. 
+          The TurtleBot's biggest challenge was running into walls where it was given a set polygon to stay within and said polygon being too small for the pathfinding to find an optimal path. 
           Many runs were needed to calibrate the robot to not run into obstacles while also not getting stuck trying to find a route that it believes is impossible to. 
+          Another challenge was tuning parameters like inflation radius, robot radius, polygon dimension (for available navigating area) for navigation and mapping. (These had to be tuned everytime we moved the cones and changed environment setting)
+          Irregular Lab wall unlike the sim environment (especially Cory 105's chairs) often caused LiDAR to get confused, so we made walls with wooden cardboards.
         </p>
         <p>
           The UR7e’s biggest challenge was error accumulation, as by the time the third cube would be loaded the arm would miss the cube entirely and end the run. 
           This, in conjunction with the Real Sense camera not detecting the ArUco tag properly or not properly labeling the color of a cube added to a lot of troubleshooting time. 
           Changing parameters was always necessary at the start of the day, as the parameters would change and there was no clear reason why. 
         </p>
+        <p>
+          (Bridge) TurtleBot and UR7e has a common TF name: baselink. We failed to use Namespace to rename topics, so we used ROS2 Bridge Domain instead.
+        </p>
         <p class="subhead">Improvements and extensions</p>
         <p>
           The area that needed most improvement was the UR7e process, as it could be further optimized to do its job better. 
           For example, instead of loading one cube at a time it would load as many cubes as the turtlebot needs at that one time. 
           This way instead of going back and forth from its start point to the hazards it just loads 3 blocks at once and goes to the hazards. 
+          Also, diverse color combinations of blocks for certain hazards would have been useful and interesting. 
           Another improvement would be to use a custom PID controller that factored in the error that could have happened during our process or when we started our day on the arm to save time. 
-          Finally, the turtlebot could have used a better way to detect all the cones by spinning in predetermined locations to maximize the chance of spotting a hazard. 
+          Since our gripper seldom failed and bumped to the blocks, this change would have made our pick up much more rigorous.
+          Finally, the turtlebot could have used a better way to detect all the colors by spinning whenever it encounters a cluster to maximize the chance of detecting its color. 
         </p>
         <p>
-          For extensions, the turtlebot having some sort of actuator that lets the person know it has delivered the block would have been great, like a buzzer. 
-          The UR7e could have also been extended upon if it used different shaped objects with color identification for a more realistic operation. 
+          For extensions, the turtlebot having some sort of actuator that lets the person know it has delivered the block would have been great, like a buzzer. It would enable a clearer mission communication. (we have been reading logs to figure out which task it is on.)
+          The UR7e could have also been extended upon if it used different shaped objects with color identification for a more realistic operation. (this might require improvement in current detecting method.)
           Finally, the turtlebot could also have used some sort of apparatus that would offload the materials instead of a person to further automate the process.
         </p>
         <h2>AI Disclosure</h2>
@@ -85,7 +92,7 @@
         <ul>
           <p>
             <li>
-            Prior to the policy release we used AI for helping generate a skeleton node code (in a simialr format to labs) with TODO's and scaffolding for the project as 
+            Prior to the policy release we used AI for helping generate a skeleton node code (in a similar format to labs) with TODO's and scaffolding for the project as 
             well as some param files and launch files. In addition AI (Cursor and Claude) was used to help generate our README and some boilerpalte helper functions for interacting with action servers and the other nodes.
             </li>
             <li>
@@ -103,8 +110,8 @@
             <li>
             AI (Cursor and Claude) was also used to help us connect the 2 PC's using ROS2 Domain Bridge and the YAML bridge to relay selected topics.
             </li>
+            <li>Formatting the final project website layout</li>
           </p>
-          <li>Formatting the final project website layout</li>
         </ul>
       </section>
     </main>
