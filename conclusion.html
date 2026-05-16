@@ -45,12 +45,34 @@
       <section class="content-section" id="conclusion">
         <h2>Conclusion</h2>
         <p>
-          Our project was able to reach our original goal: demonstrate an end-to-end emergency response system at a small scale, integrating the major themes of C106A.
-
+          Our project was able to reach our original goal: demonstrate an end-to-end emergency response system at a small scale. 
+          The Turtlebot used perception and controls to figure out autonomously where to go consistently without running into obstacles via mapping and path finding. 
+          The UR7e used dynamics and Inverse Kinematics to go to pre-determined locations and figure out where to pick up the block using point cloud and ArUco tag respectively to drop the block into the storage basin for delivery. 
+          This also realized the proof of concept that robots could autonomously deliver objects without error and can be applied to many fields outside the scope of this project, such as palletization in warehouses. 
         </p>
         <p class="subhead">Challenges</p>
+        <p>
+          The turtlebots biggest challenge was running into walls where it was given a set polygon to stay within and said polygon being too small for the pathfinding to find an optimal path. 
+          Many runs were needed to calibrate the robot to not run into obstacles while also not getting stuck trying to find a route that it believes is impossible to. 
+        </p>
+        <p>
+          The UR7e’s biggest challenge was error accumulation, as by the time the third cube would be loaded the arm would miss the cube entirely and end the run. 
+          This, in conjunction with the Real Sense camera not detecting the ArUco tag properly or not properly labeling the color of a cube added to a lot of troubleshooting time. 
+          Changing parameters was always necessary at the start of the day, as the parameters would change and there was no clear reason why. 
+        </p>
         <p class="subhead">Improvements and extensions</p>
-
+        <p>
+          The area that needed most improvement was the UR7e process, as it could be further optimized to do its job better. 
+          For example, instead of loading one cube at a time it would load as many cubes as the turtlebot needs at that one time. 
+          This way instead of going back and forth from its start point to the hazards it just loads 3 blocks at once and goes to the hazards. 
+          Another improvement would be to use a custom PID controller that factored in the error that could have happened during our process or when we started our day on the arm to save time. 
+          Finally, the turtlebot could have used a better way to detect all the cones by spinning in predetermined locations to maximize the chance of spotting a hazard. 
+        </p>
+        <p>
+          For extensions, the turtlebot having some sort of actuator that lets the person know it has delivered the block would have been great, like a buzzer. 
+          The UR7e could have also been extended upon if it used different shaped objects with color identification for a more realistic operation. 
+          Finally, the turtlebot could also have used some sort of apparatus that would offload the materials instead of a person to further automate the process.
+        </p>
         <h2>AI Disclosure</h2>
         <p>
           Our team has followed the AI Usage Policy for this project.
